@@ -5,7 +5,7 @@ $('#main-table').children('tr').each(function() {
 });
 
 var measureNumber = 12;
-var soundArray = ["audio/high-drum.mp3","audio/low-drum.mp3"]
+var soundArray = ["audio/sound0.mp3","audio/sound1.mp3","audio/sound2.mp3","audio/sound3.mp3","audio/sound4.mp3","audio/sound5.mp3","audio/sound6.mp3","audio/sound7.mp3"]
 $('#btn-add-table').on("click",function(){
     var row = document.getElementById('main-table').appendChild(document.createElement('tr'));
     var i = 0;
@@ -13,14 +13,22 @@ $('#btn-add-table').on("click",function(){
     for(i = 0; i<cellNumber; i++){
         var cell = row.appendChild(document.createElement('td'));
         cell.setAttribute('data-sound',soundArray[0]);
+        cell.className = cell.className + "droppable";
         var img = document.createElement('img');
-        img.src = "img/koala.jpg";
+        img.src = "img/default.jpg";
         img.alt="kk";
         img.border=3; 
         img.height=60; 
         img.width=60;
         cell.appendChild(img);
         addAudioProperties(cell);
+        $(cell).droppable({
+            drop: function(event, ui) {
+                $(this).children('img').attr('src',ui.draggable.children('img').attr('src'));
+                $(this).data('sound',ui.draggable.data('sound'));
+                addAudioProperties(this);
+            }
+        });
     }
 });
 
@@ -75,12 +83,20 @@ function loadAudio( object, url) {
 function addAudioProperties(object) {
     object.source = $(object).data('sound');
     loadAudio(object, object.source);
+    var sourceBuf;
     object.play = function () {
         var s = context.createBufferSource();
+        sourceBuf = s;
         s.buffer = object.buffer;
         s.connect(context.destination);
         s.start(0);
         object.s = s;
+        console.log("play");
+    }
+    object.stop = function () {
+        sourceBuf.stop(0);
+        object.s = sourceBuf;
+        console.log("stop");
     }
 }
 
@@ -97,6 +113,8 @@ $('.draggable').draggable({ opacity: 0.7, helper: "clone" });
 $('.droppable').droppable({
     drop: function(event, ui) {
         $(this).children('img').attr('src',ui.draggable.children('img').attr('src'));
+        $(this).data('sound',ui.draggable.data('sound'));
+        addAudioProperties(this);
     }
 });
 
