@@ -1,3 +1,11 @@
 #body{
-	margin-top: 51px;
+	margin-top:51px;
+}
+
+button{
+	margin: 1px;
+}
+
+tbody td.myhover{
+	background-color: #e9c9ff;
 }

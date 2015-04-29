@@ -12,6 +12,7 @@
 		<!-- Bootstrap core CSS -->
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="./self.css">
+		<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
 
 	</head>
 	<body>
@@ -39,8 +40,45 @@
 		</header>
 		<div id="body">
 		    <div class="container">
-			    <div class="row">
-				  <div class="col-md-12">title</div>
+			    <!--<div class="row">
+				  <div class="col-md-6">
+				  	<audio id="aa" src="audio/low-drum.mp3"></audio>
+				  	<button class="col-md-1 btn btn-info btn-lg">Play</button>
+				  </div>
+				  <div id="tests" class="col-md-6" style="background-color:#FFBB73;" data-sound="audio/low-drum.mp3">ddddd</div>
+				</div>-->
+				<div class="row">
+					<aside class="col-md-1" id="sidebar">
+						<button class="col-md-12 btn btn-info btn-lg" id="btn-sidebar-toggle">toggle</button>
+					</aside>
+					<aside class="col-md-2" id="sidebar2" hidden>
+						<button class="col-md-12 btn btn-info btn-lg" id="btn-sidebar-toggle2">toggle</button>
+						<button class="col-md-12 btn btn-info btn-lg">toggle</button>
+						<button class="col-md-12 btn btn-info btn-lg">toggle</button>
+						<button class="col-md-12 btn btn-info btn-lg">toggle</button>
+					</aside>
+					<div class="col-md-11 table-responsive">
+						<button class="col-md-1 btn btn-info btn-lg" id="btn-add-table">Add</button>
+						<button class="col-md-1 btn btn-info btn-lg" id="btn-play-tune">Play</button>
+						<table class="table table table-bordered">
+							<tbody id="main-table">
+								<tr>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						            <td data-sound="audio/low-drum.mp3"><img src="img/koala.jpg" alt="kk" border=3 height=60 width=60></img></td>
+						        </tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -48,7 +86,9 @@
 	    
 
 	    <!-- Bootstrap core js -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>	
-		<script src="http://code.jquery.com/jquery.min.js"></script>
+	    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="./self.js"></script>
 	</body>
 </html>
