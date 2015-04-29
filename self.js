@@ -96,7 +96,6 @@ $('#sidebar2').children('#btn-sidebar-toggle2').click(function(){
 $('.draggable').draggable({ opacity: 0.7, helper: "clone" });
 $('.droppable').droppable({
     drop: function(event, ui) {
-        console.log(ui.draggable.children('img').attr('src'));
         $(this).children('img').attr('src',ui.draggable.children('img').attr('src'));
     }
 });
