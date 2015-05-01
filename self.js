@@ -104,7 +104,7 @@ $('#sidebar').children('#btn-sidebar-toggle').click(function(){
     $('#sidebar').hide();
     $('#sidebar2').show( "slide", { direction: "up" }, "slow" );
 });
-$('#sidebar2').children('#btn-sidebar-toggle2').click(function(){
+$('#sidebar2').children("#toggle-wraper").children('#btn-sidebar-toggle2').click(function(){
     $('#sidebar2').hide( "slide", { direction: "up" }, "slow" );
     $('#sidebar').show();
 });
@@ -118,6 +118,14 @@ $('.droppable').droppable({
     }
 });
 
+$("a[data-toggle='tab']").click(function(e){
+    var tabSelector = this;
+    $(".tab-content").children(".tab-pane").each(function(){
+        $(this).css("border-color",$(tabSelector).css('backgroundColor'));
+        console.log($(this).css("border-color"));
+    });
+});
+
 /*$('#tests').each(function() {
     addAudioProperties(this);
 });
@@ -127,5 +135,7 @@ $('#tests').click(function() {
 $('button').on("click",function(){
     $(this).parents('div').children('audio').trigger('play');
 });*/
+
+
 
 

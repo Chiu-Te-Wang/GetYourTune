@@ -1,5 +1,13 @@
 #body{
-	margin-top:51px;
+	min-height: 500px; 
+   	height:auto !important; 
+   	height: 500px; 
+}
+#top-bar{
+	margin-bottom: 51px;
+}
+#footer{
+	background-color: silver;
 }
 
 button{
@@ -8,4 +16,42 @@ button{
 
 tbody td.myhover{
 	background-color: #e9c9ff;
+}
+
+.nav .nav-tab{
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+.tab-pane{
+  padding:3px 0px 0px 8px;
+  border: 3px solid #F48122;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  margin-left:1px;
+}
+div.draggable, td.droppable{
+	padding: 10px;
+	margin-left: auto;
+    margin-right: auto;
+}
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+#drumTab >a{
+	background-color:#F48122;
+}
+#pianoTab >a{
+	background-color:#FFD301;
+}
+#specialTab >a{
+	background-color:#C852C3;
+}
+
+#sidebar2, #sidebar, #main-div{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+table.table{
+	margin-top:20px;
 }
