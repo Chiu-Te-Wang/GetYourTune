@@ -15,7 +15,7 @@ $('#btn-add-table').on("click",function(){
         cell.setAttribute('data-sound',soundArray[0]);
         cell.className = cell.className + "droppable";
         var img = document.createElement('img');
-        img.src = "img/default.jpg";
+        img.src = "img/default.png";
         img.alt="kk";
         img.border=3; 
         img.height=60; 
@@ -109,7 +109,7 @@ $('#sidebar2').children('#btn-sidebar-toggle2').click(function(){
     $('#sidebar').show();
 });
 
-$('.draggable').draggable({ opacity: 0.7, helper: "clone" });
+$('.draggable').draggable({ opacity: 0.7, helper: "clone", zIndex: 100 });
 $('.droppable').droppable({
     drop: function(event, ui) {
         $(this).children('img').attr('src',ui.draggable.children('img').attr('src'));
