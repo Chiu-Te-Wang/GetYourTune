@@ -33,12 +33,12 @@ $('#btn-add-table').on("click",function(){
 });
 
 var tunePlayingOrNot = false;
-var interval;
+var loopInterval;
 var measureCounter = 0;
 var playSpeedSec = 0.3;
 $('#btn-play-tune').on("click",function(){
     if(tunePlayingOrNot){
-        clearInterval(interval);
+        clearInterval(loopInterval);
         tunePlayingOrNot = false;
         var previousTdIndex = measureCounter-1;
         if(measureCounter == 0){ previousTdIndex = measureNumber-1;}
@@ -52,20 +52,22 @@ $('#btn-play-tune').on("click",function(){
     else{
         tunePlayingOrNot = true;
         $(this).html("Stop");
-        interval = setInterval(function () {
-            var previousTdIndex = measureCounter-1;
-            if(measureCounter == 0){ previousTdIndex = measureNumber-1;}
-            $('#main-table').children('tr').each(function() {
-                $(this).children('td').eq(previousTdIndex).removeClass("myhover");
-                $(this).children('td').eq(previousTdIndex).trigger('stop');
-                $(this).children('td').eq(measureCounter).addClass("myhover");
-                $(this).children('td').eq(measureCounter).trigger('play');
-            });
-            measureCounter++;
-            if(measureCounter == measureNumber){measureCounter = 0;}
-        }, playSpeedSec*1000);
+        loopInterval = setInterval(loopPlayCallback, playSpeedSec*1000);
     }
 });
+
+function loopPlayCallback(){
+    var previousTdIndex = measureCounter-1;
+    if(measureCounter == 0){ previousTdIndex = measureNumber-1;}
+    $('#main-table').children('tr').each(function() {
+        $(this).children('td').eq(previousTdIndex).removeClass("myhover");
+        $(this).children('td').eq(previousTdIndex).trigger('stop');
+        $(this).children('td').eq(measureCounter).addClass("myhover");
+        $(this).children('td').eq(measureCounter).trigger('play');
+    });
+    measureCounter++;
+    if(measureCounter == measureNumber){measureCounter = 0;}
+}
 
 var context = new AudioContext();
 function loadAudio( object, url) {
@@ -80,13 +82,13 @@ function loadAudio( object, url) {
     }
     request.send();
 }
-
 function addAudioProperties(object) {
     object.source = $(object).data('sound');
     loadAudio(object, object.source);
     var sourceBuf;
     object.play = function () {
         var s = context.createBufferSource();
+        s.playbackRate.value = Math.min(1.0/playSpeedSec, 2.0);
         sourceBuf = s;
         s.buffer = object.buffer;
         s.connect(context.destination);
@@ -123,6 +125,21 @@ $("a[data-toggle='tab']").click(function(e){
         $(this).css("border-color",$(tabSelector).css('backgroundColor'));
         console.log($(this).css("border-color"));
     });
+});
+
+$("#slider-speed").slider({
+    range:"min",
+    value:1,
+    step:0.1,
+    min:0.5,
+    max:5.0,
+    slide : function(event, ui){
+        playSpeedSec = 1.0/ui.value;
+        if(tunePlayingOrNot){
+            clearInterval(loopInterval);
+            loopInterval = setInterval(loopPlayCallback, playSpeedSec*1000);
+        }
+    }
 });
 /*
 var myRecord;
@@ -205,10 +222,27 @@ $("#btn-record").click(function(e){
         $(this).removeClass("clicked");
         streamData.stop();
         recordRTC.stopRecording(function(audioURL) {
-            $("#recordTest").data("sound", audioURL);
+            var recordTag = document.getElementById('recordTabContent').appendChild(document.createElement('div'));
+            recordTag.setAttribute('data-sound',audioURL);
+            recordTag.className = recordTag.className + "draggable ";
+            recordTag.className = recordTag.className + "col-md-1 ";
+            $(recordTag).draggable({ opacity: 0.7, helper: "clone", zIndex: 100 });
+            var img = document.createElement('img');
+            img.src = "img/icon8.png";
+            img.alt="user-sound";
+            img.border=3; 
+            img.height=60; 
+            img.width=60;
+            recordTag.appendChild(img);
 
-            var recordedBlob = recordRTC.getBlob();
-            recordRTC.getDataURL(function(dataURL) { });
+            //$("table").append('<div class="col-md-1"><a href="' + audioURL + '" download="RecordRTC.webm" target="_blank">Save RecordRTC.webm to Disk!</a></div>');
+            //addAudioProperties("#recordTest");
+
+            /*var recordedBlob = recordRTC.getBlob();
+            recordRTC.getDataURL(function(dataURL) {
+                console.log("dataURL : "+dataURL);
+            });
+            console.log("recordedBlob : "+recordedBlob);*/
         });
 
     }
