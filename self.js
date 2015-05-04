@@ -35,6 +35,7 @@ $('#btn-add-table').on("click",function(){
 var tunePlayingOrNot = false;
 var interval;
 var measureCounter = 0;
+var playSpeedSec = 0.3;
 $('#btn-play-tune').on("click",function(){
     if(tunePlayingOrNot){
         clearInterval(interval);
@@ -62,7 +63,7 @@ $('#btn-play-tune').on("click",function(){
             });
             measureCounter++;
             if(measureCounter == measureNumber){measureCounter = 0;}
-        }, 500);
+        }, playSpeedSec*1000);
     }
 });
 
@@ -91,12 +92,10 @@ function addAudioProperties(object) {
         s.connect(context.destination);
         s.start(0);
         object.s = s;
-        console.log("play");
     }
     object.stop = function () {
         sourceBuf.stop(0);
         object.s = sourceBuf;
-        console.log("stop");
     }
 }
 
@@ -126,6 +125,30 @@ $("a[data-toggle='tab']").click(function(e){
     });
 });
 
+$("#btn-record").click(function(e){
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
+                             navigator.msGetUserMedia;
+    if(navigator.getUserMedia){
+        navigator.getUserMedia( {audio:true}, 
+            function(stream){
+                var s = context.createBufferSource();
+                //var s = context.createMediaStreamSource(stream); 
+                s.buffer = this.buffer;
+                s.connect(context.destination);
+                s.start(0);
+                this.s = s;
+                console.log("play");
+
+            },
+            function(error){
+                console.log("Error : "+error.name);
+            });
+    }
+    else{
+        console.log("getUserMedia is not support!");
+    }
+});
+
 /*$('#tests').each(function() {
     addAudioProperties(this);
 });
@@ -135,6 +158,7 @@ $('#tests').click(function() {
 $('button').on("click",function(){
     $(this).parents('div').children('audio').trigger('play');
 });*/
+
 
 
 
