@@ -124,30 +124,48 @@ $("a[data-toggle='tab']").click(function(e){
         console.log($(this).css("border-color"));
     });
 });
-
+/*
+var myRecord;
+var streamData;
 $("#btn-record").click(function(e){
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
+    if(!($(this).hasClass("clicked"))){
+        console.log("start recording!");
+        $(this).addClass("clicked");
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
                              navigator.msGetUserMedia;
-    if(navigator.getUserMedia){
-        navigator.getUserMedia( {audio:true}, 
-            function(stream){
-                var s = context.createBufferSource();
-                //var s = context.createMediaStreamSource(stream); 
-                s.buffer = this.buffer;
-                s.connect(context.destination);
-                s.start(0);
-                this.s = s;
-                console.log("play");
-
-            },
-            function(error){
-                console.log("Error : "+error.name);
-            });
+        if(navigator.getUserMedia){
+            navigator.getUserMedia( {audio:true}, 
+                function(stream){
+                    streamData = stream;
+                    var input = context.createMediaStreamSource(stream); 
+                    myRecord = new Recorder(input, {
+                      workerPath: '/js/Recorderjs/recorderWorker.js'
+                    });
+                    myRecord.record();
+                },
+                function(error){
+                    console.log("Error : "+error.name);
+                });
+        }
+        else{
+            console.log("getUserMedia is not support!");
+        }
     }
     else{
-        console.log("getUserMedia is not support!");
+        console.log("stop recording!");
+        $(this).removeClass("clicked");
+        streamData.stop();
+        myRecord.stop();
+        myRecord.exportWAV(function(e){
+            myRecord.clear();
+            Recorder.forceDownload(e, "filename.wav");
+            console.log("Saving!");
+        });
+
     }
+    
 });
+*/
 
 /*$('#tests').each(function() {
     addAudioProperties(this);
@@ -159,7 +177,40 @@ $('button').on("click",function(){
     $(this).parents('div').children('audio').trigger('play');
 });*/
 
+var streamData;
+var recordRTC;
+$("#btn-record").click(function(e){
+    if(!($(this).hasClass("clicked"))){
+        console.log("start recording!");
+        $(this).addClass("clicked");
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
+                             navigator.msGetUserMedia;
+        if(navigator.getUserMedia){
+            navigator.getUserMedia( {audio:true}, 
+                function(stream){
+                    streamData = stream;
+                    recordRTC = RecordRTC(stream);
+                    recordRTC.startRecording();
+                },
+                function(error){
+                    console.log("Error : "+error.name);
+                });
+        }
+        else{
+            console.log("getUserMedia is not support!");
+        }
+    }
+    else{
+        console.log("stop recording!");
+        $(this).removeClass("clicked");
+        streamData.stop();
+        recordRTC.stopRecording(function(audioURL) {
+            $("#recordTest").data("sound", audioURL);
 
+            var recordedBlob = recordRTC.getBlob();
+            recordRTC.getDataURL(function(dataURL) { });
+        });
 
-
-
+    }
+    
+});
