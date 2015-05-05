@@ -208,6 +208,6 @@ $("#btn-record").click(function(e){
     
 });
 
-$("#dialog").dialog({
-	autoOpen: false
+$("#btn-save-tune").click(function(e){
+	
 });
