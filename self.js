@@ -35,7 +35,7 @@ $('#btn-add-table').on("click",function(){
 var tunePlayingOrNot = false;
 var loopInterval;
 var measureCounter = 0;
-var playSpeedSec = 0.3;
+var playSpeedSec = 0.5;
 $('#btn-play-tune').on("click",function(){
     if(tunePlayingOrNot){
         clearInterval(loopInterval);
