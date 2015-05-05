@@ -36,7 +36,7 @@ $('#btn-add-table').on("click",function(){
 var tunePlayingOrNot = false;
 var loopInterval;
 var measureCounter = 0;
-var playSpeedSec = 0.5;
+var playSpeedSec = 0.8;
 $('#btn-play-tune').on("click",function(){
     if(tunePlayingOrNot){
         clearInterval(loopInterval);
@@ -131,7 +131,7 @@ $("a[data-toggle='tab']").click(function(e){
 //tune play speed change event
 $("#slider-speed").slider({
     range:"min",
-    value:1,
+    value:1.2,
     step:0.1,
     min:0.5,
     max:5.0,
@@ -140,6 +140,7 @@ $("#slider-speed").slider({
         if(tunePlayingOrNot){
             clearInterval(loopInterval);
             loopInterval = setInterval(loopPlayCallback, playSpeedSec*1000);
+            console.log("speed = "+ui.value);
         }
     }
 });
