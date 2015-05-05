@@ -71,7 +71,6 @@ html, body {
 }
 #body {
   min-height: 100%;
-  /* equal to footer height */
   margin-bottom: -25px; 
 }
 #body:after {

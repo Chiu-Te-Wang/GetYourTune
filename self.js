@@ -4,6 +4,7 @@ $('#main-table').children('tr').each(function() {
     });
 });
 
+//add new row event
 var measureNumber = 12;
 var soundArray = ["audio/sound0.mp3","audio/sound1.mp3","audio/sound2.mp3","audio/sound3.mp3","audio/sound4.mp3","audio/sound5.mp3","audio/sound6.mp3","audio/sound7.mp3"]
 $('#btn-add-table').on("click",function(){
@@ -127,6 +128,7 @@ $("a[data-toggle='tab']").click(function(e){
     });
 });
 
+//tune play speed change event
 $("#slider-speed").slider({
     range:"min",
     value:1,
@@ -141,22 +143,13 @@ $("#slider-speed").slider({
         }
     }
 });
-
-/*$('#tests').each(function() {
-    addAudioProperties(this);
-});
-$('#tests').click(function() {
-    this.play();
-});
-$('button').on("click",function(){
-    $(this).parents('div').children('audio').trigger('play');
-});*/
-
+//record event
 var streamData;
 var recordRTC;
 $("#btn-record").click(function(e){
     if(!($(this).hasClass("clicked"))){
         console.log("start recording!");
+        var tempRecordBtn = this;
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
                              navigator.msGetUserMedia;
         if(navigator.getUserMedia){
@@ -165,7 +158,7 @@ $("#btn-record").click(function(e){
                     streamData = stream;
                     recordRTC = RecordRTC(stream);
                     recordRTC.startRecording();
-                    $(this).addClass("clicked");
+                    $(tempRecordBtn).addClass("clicked");
                 },
                 function(error){
                     console.log("Error : "+error.name);
@@ -208,6 +201,7 @@ $("#btn-record").click(function(e){
     
 });
 
+//save tune event
 $("#btn-save-tune").click(function(e){
 	
 });
