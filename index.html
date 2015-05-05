@@ -69,6 +69,7 @@
 									<div class="col-md-1 draggable" data-sound="audio/sound4.mp3"><img src="img/icon4.png" alt="kk" border=3 height=60 width=60></img></div>							
 									<div class="col-md-1 draggable" data-sound="audio/sound6.mp3"><img src="img/icon6.png" alt="kk" border=3 height=60 width=60></img></div>
 									<div class="col-md-1 draggable" data-sound="audio/sound7.mp3"><img src="img/icon7.png" alt="kk" border=3 height=60 width=60></img></div>
+									<div class="col-md-1 draggable" data-sound="audio/sound0.mp3"><img src="img/icon9.png" alt="kk" border=3 height=60 width=60></img></div>
 								</div>
 								<div id="recordTabContent"  class="tab-pane fade col-md-12">
 									
@@ -79,6 +80,7 @@
 					<div class="col-md-11 table-responsive" id="main-div">
 						<button class="col-md-1 btn btn-info btn-lg" id="btn-add-table">Add</button>
 						<button class="col-md-1 btn btn-info btn-lg" id="btn-play-tune">Play</button>
+						<button class="col-md-1 btn btn-info btn-lg" id="btn-save-tune">Save</button>
 						<div class="col-md-4" id="slider-speed-wrapper"><div id="slider-speed"></div></div>
 						<table class="table table table-bordered col-md-12">
 							<tbody id="main-table">
@@ -101,9 +103,31 @@
 					</div>
 				</div>
 			</div>
+			<!-- record error dialog -->
+			<div class="modal fade" id="recordErrorDialog">
+			  <div class="modal-dialog modal-sm">
+			    <div class="modal-content" id="recordErrorDialog-title">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" >Recored Failed</h4>
+			      </div>
+			      <div class="modal-body">
+			        <p>Recording is failed. Please check your record device or give the permission.</p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 		</div>
 		<footer id="footer">
-			<div id="author"><a src="https://github.com/Chiu-Te-Wang">Chiu-Te-Wang</a></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 copyright">
+						<div class="col-md-12 copyright-prefix">© COPYRIGHT 2015 All Right Reserved | Designed by
+						<a id="author" href="https://github.com/Chiu-Te-Wang">Chiu-Te-Wang</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</footer>
 	    
 

@@ -141,48 +141,6 @@ $("#slider-speed").slider({
         }
     }
 });
-/*
-var myRecord;
-var streamData;
-$("#btn-record").click(function(e){
-    if(!($(this).hasClass("clicked"))){
-        console.log("start recording!");
-        $(this).addClass("clicked");
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
-                             navigator.msGetUserMedia;
-        if(navigator.getUserMedia){
-            navigator.getUserMedia( {audio:true}, 
-                function(stream){
-                    streamData = stream;
-                    var input = context.createMediaStreamSource(stream); 
-                    myRecord = new Recorder(input, {
-                      workerPath: '/js/Recorderjs/recorderWorker.js'
-                    });
-                    myRecord.record();
-                },
-                function(error){
-                    console.log("Error : "+error.name);
-                });
-        }
-        else{
-            console.log("getUserMedia is not support!");
-        }
-    }
-    else{
-        console.log("stop recording!");
-        $(this).removeClass("clicked");
-        streamData.stop();
-        myRecord.stop();
-        myRecord.exportWAV(function(e){
-            myRecord.clear();
-            Recorder.forceDownload(e, "filename.wav");
-            console.log("Saving!");
-        });
-
-    }
-    
-});
-*/
 
 /*$('#tests').each(function() {
     addAudioProperties(this);
@@ -199,7 +157,6 @@ var recordRTC;
 $("#btn-record").click(function(e){
     if(!($(this).hasClass("clicked"))){
         console.log("start recording!");
-        $(this).addClass("clicked");
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
                              navigator.msGetUserMedia;
         if(navigator.getUserMedia){
@@ -208,9 +165,11 @@ $("#btn-record").click(function(e){
                     streamData = stream;
                     recordRTC = RecordRTC(stream);
                     recordRTC.startRecording();
+                    $(this).addClass("clicked");
                 },
                 function(error){
                     console.log("Error : "+error.name);
+                    $("#recordErrorDialog").modal('show');
                 });
         }
         else{
@@ -247,4 +206,8 @@ $("#btn-record").click(function(e){
 
     }
     
+});
+
+$("#dialog").dialog({
+	autoOpen: false
 });
