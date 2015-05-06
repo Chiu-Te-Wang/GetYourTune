@@ -4,14 +4,16 @@ $('#main-table').children('tr').each(function() {
     });
 });
 
-var target = $('#navbar-container');
+var target = $('.navbar');
 var targetHeight = target.outerHeight();
 $(document).scroll(function(e){
-    var scrollPercent = (targetHeight - window.scrollY) / targetHeight;
+    var scrollPercent = (targetHeight - window.scrollY -50) / targetHeight;
     if(scrollPercent >= 0){
-        target.css('background-color', 'rgba(255, 255, 255, 1)');
+        target.css('opacity', '1.0');
     }
-    else  {target.css('background-color', 'rgba(255, 255, 255, 0.5)'); console.log("scroll");}
+    else{
+        target.css('opacity', '0.85');
+    }
 });
 
 //add new row event
