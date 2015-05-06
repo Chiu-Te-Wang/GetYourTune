@@ -11,7 +11,7 @@ $(document).scroll(function(e){
     if(scrollPercent >= 0){
         target.css('background-color', 'rgba(255, 255, 255, 1)');
     }
-    else  target.css('background-color', 'rgba(255, 255, 255, 0.5)');
+    else  {target.css('background-color', 'rgba(255, 255, 255, 0.5)'); console.log("scroll");}
 });
 
 //add new row event
