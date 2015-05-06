@@ -4,6 +4,16 @@ $('#main-table').children('tr').each(function() {
     });
 });
 
+var target = $('#navbar-container');
+var targetHeight = target.outerHeight();
+$(document).scroll(function(e){
+    var scrollPercent = (targetHeight - window.scrollY) / targetHeight;
+    if(scrollPercent >= 0){
+        target.css('background-color', 'rgba(255, 255, 255, 1)');
+    }
+    else  target.css('background-color', 'rgba(255, 255, 255, 0.5)');
+});
+
 //add new row event
 var measureNumber = 12;
 var soundArray = ["audio/sound0.mp3","audio/sound1.mp3","audio/sound2.mp3","audio/sound3.mp3","audio/sound4.mp3","audio/sound5.mp3","audio/sound6.mp3","audio/sound7.mp3"]
