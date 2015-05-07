@@ -193,7 +193,7 @@ $("#btn-record").click(function(e){
             recordTag.className = recordTag.className + "col-md-1 ";
             $(recordTag).draggable({ opacity: 0.7, helper: "clone", zIndex: 100 });
             var img = document.createElement('img');
-            img.src = "img/icon8.png";
+            img.src = "img/record0.png";
             img.alt="user-sound";
             img.border=3; 
             img.height=60; 
@@ -216,5 +216,30 @@ $("#btn-record").click(function(e){
 
 //save tune event
 $("#btn-save-tune").click(function(e){
-	
+    var bufferLength = 0;
+    var bufferSampleRate = 0.0;
+    $("#main-table").children("tr").each(function(){
+        $(this).children("td").each(function(){
+            bufferLength += this.buffer.length;
+            bufferSampleRate = this.buffer.sampleRate;
+
+        });
+    });
+    console.log("bufferLength = "+bufferLength);
+    console.log("bufferSampleRate = "+bufferSampleRate);
+	var appendBuffer = context.createBuffer(1, bufferLength, bufferSampleRate);
+    var channel = appendBuffer.getChannelData(0);
+    var tempLength = 0;
+    $("#main-table").children("tr").each(function(){
+        $(this).children("td").each(function(){
+            channel.set(this.buffer.getChannelData(0),tempLength);
+            tempLength += this.buffer.length;
+        });
+    });
+    var chunk = [];
+    chunk.push(appendBuffer.getChannelData(0));
+    var blob = new Blob(chunk, { 'type' : 'audio/mpeg; codecs=mpeg' });
+    //window.location.href = URL.createObjectURL(blob);
+    //$("table").append('<div class="col-md-1"><a href="' + URL.createObjectURL(blob) + '" download="RecordRTC.mp3" target="_blank">Save RecordRTC.webm to Disk!</a></div>');
+
 });
