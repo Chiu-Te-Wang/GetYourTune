@@ -36,7 +36,7 @@ div.draggable, td.droppable{
 #drumTab >a{
 	background-color:#F48122;
 }
-#pianoTab >a{
+#stringTab >a{
 	background-color:#FFD301;
 }
 #specialTab >a{
@@ -44,6 +44,10 @@ div.draggable, td.droppable{
 }
 #recordTab >a{
 	background-color:#20F320;	
+}
+
+#otherTab >a{
+	background-color:#FA008D;	
 }
 
 #sidebar2, #sidebar, #main-div{
