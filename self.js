@@ -142,7 +142,6 @@ $("a[data-toggle='tab']").click(function(e){
     var tabSelector = this;
     $(".tab-content").children(".tab-pane").each(function(){
         $(this).css("border-color",$(tabSelector).css('backgroundColor'));
-        console.log($(this).css("border-color"));
     });
 });
 
@@ -158,7 +157,6 @@ $("#slider-speed").slider({
         if(tunePlayingOrNot){
             clearInterval(loopInterval);
             loopInterval = setInterval(loopPlayCallback, playSpeedSec*1000);
-            console.log("speed = "+ui.value);
         }
     }
 });
@@ -167,7 +165,6 @@ var streamData;
 var recordRTC;
 $("#btn-record").click(function(e){
     if(!($(this).hasClass("clicked"))){
-        console.log("start recording!");
         var tempRecordBtn = this;
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
                              navigator.msGetUserMedia;
@@ -189,7 +186,6 @@ $("#btn-record").click(function(e){
         }
     }
     else{
-        console.log("stop recording!");
         $(this).removeClass("clicked");
         streamData.stop();
         recordRTC.stopRecording(function(audioURL) {
@@ -241,8 +237,8 @@ $("#btn-save-tune").click(function(e){
 
         });
     });
-    console.log("bufferLength = "+bufferLength);
-    console.log("bufferSampleRate = "+bufferSampleRate);
+    //console.log("bufferLength = "+bufferLength);
+    //console.log("bufferSampleRate = "+bufferSampleRate);
 	var appendBuffer = context.createBuffer(1, bufferLength, bufferSampleRate);
     var channel = appendBuffer.getChannelData(0);
     var tempLength = 0;
