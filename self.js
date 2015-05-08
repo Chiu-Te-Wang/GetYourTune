@@ -205,6 +205,10 @@ $("#btn-record").click(function(e){
             img.height=60; 
             img.width=60;
             recordTag.appendChild(img);
+            recordTag.className += " sound-source ";
+            $(recordTag).click(function(){
+                $(this).trigger('play');
+            });
             addAudioProperties(recordTag);
 
             //$("table").append('<div class="col-md-1"><a href="' + audioURL + '" download="RecordRTC.webm" target="_blank">Save RecordRTC.webm to Disk!</a></div>');
