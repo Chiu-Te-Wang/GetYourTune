@@ -178,6 +178,8 @@ $("#btn-record").click(function(e){
                 },
                 function(error){
                     console.log("Error : "+error.name);
+                    $("#recordErrorDialog").children("div").children("div").children(".modal-body").append('<p>Recording is failed. Please check your record device or give the permission.</p>');
+                    $("#recordErrorDialog").children("div").children("div").children(".modal-header").children(".modal-title").text("Recored Failed");
                     $("#recordErrorDialog").modal('show');
                 });
         }
@@ -250,8 +252,61 @@ $("#btn-save-tune").click(function(e){
     });
     var chunk = [];
     chunk.push(appendBuffer.getChannelData(0));
-    var blob = new Blob(chunk, { 'type' : 'audio/mpeg; codecs=mpeg' });
+    //var blob = new Blob(chunk, { 'type' : 'audio/mpeg; codecs=mpeg' });
     //window.location.href = URL.createObjectURL(blob);
     //$("table").append('<div class="col-md-1"><a href="' + URL.createObjectURL(blob) + '" download="RecordRTC.mp3" target="_blank">Save RecordRTC.webm to Disk!</a></div>');
+    setupSaving(appendBuffer);
 
 });
+
+function setupSaving(saveBuffer){
+    var WORKER_PATH = './js/Recorderjs/recorderWorker.js';
+    var worker = new Worker(WORKER_PATH);
+    var channelNum = 1;
+    worker.postMessage({
+      command: 'init',
+      config: {
+        sampleRate: saveBuffer.sampleRate,
+        numChannels: channelNum
+      }
+    });
+    worker.onmessage = function(e){
+      var blob = e.data;
+      currCallback(blob);
+    }
+    var buffer = [];
+    for (var channel = 0; channel < channelNum; channel++){
+          buffer.push(saveBuffer.getChannelData(channel));
+      }
+    worker.postMessage({
+        command: 'record',
+        buffer: buffer
+    });
+    worker.postMessage({
+        command: 'exportWAV',
+        type: 'audio/wav'
+    });
+    //worker.postMessage({ command: 'clear' });
+}
+
+var outputCounter = 1;
+function currCallback(blob){
+    var filename = 'Output'+outputCounter+'.wav';
+    outputCounter++;
+    var url = URL.createObjectURL(blob);
+    var link = window.document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    $(link).text(filename); 
+    var aContainer = window.document.createElement('div');
+    aContainer.appendChild(link);
+    aContainer.style.backgroundColor = "#82DA82";
+    aContainer.style.textAlign = "center";
+    aContainer.style.paddingTop = "5px";
+    aContainer.style.paddingBottom = "5px";
+    $("#saveAudioDialog").children("div").children("div").children(".modal-body").append(aContainer);
+    $("#saveAudioDialog").children("div").children("div").children(".modal-header").children(".modal-title").text("Saving Your Tune");
+    $("#saveAudioDialog").modal('show');
+}
+
+
