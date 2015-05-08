@@ -4,6 +4,12 @@ $('#main-table').children('tr').each(function() {
     });
 });
 
+$('.tab-content').children('.tab-pane').each(function(){
+	$(this).children('.sound-source').each(function(){
+		addAudioProperties(this);
+	});
+});
+
 var target = $('.navbar');
 var targetHeight = target.outerHeight();
 $(document).scroll(function(e){
@@ -199,6 +205,7 @@ $("#btn-record").click(function(e){
             img.height=60; 
             img.width=60;
             recordTag.appendChild(img);
+            addAudioProperties(recordTag);
 
             //$("table").append('<div class="col-md-1"><a href="' + audioURL + '" download="RecordRTC.webm" target="_blank">Save RecordRTC.webm to Disk!</a></div>');
             //addAudioProperties("#recordTest");
@@ -212,6 +219,11 @@ $("#btn-record").click(function(e){
 
     }
     
+});
+
+//click sound-source event
+$(".sound-source").click(function(){
+	$(this).trigger('play');
 });
 
 //save tune event
