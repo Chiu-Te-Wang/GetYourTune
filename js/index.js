@@ -363,7 +363,7 @@ function currCallback(blob){
 
 //social share
 //$(".share-button")
-config = {
+var config = {
   title:       "Get Your Tune",
   description: "Click, drag ,and drop. Get your own tune!",
   networks: {
