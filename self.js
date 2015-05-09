@@ -45,7 +45,12 @@ $('#btn-add-table').on("click",function(){
             drop: function(event, ui) {
                 $(this).children('img').attr('src',ui.draggable.children('img').attr('src'));
                 $(this).data('sound',ui.draggable.data('sound'));
-                addAudioProperties(this);
+                if($(ui.draggable).parent("#recordTabContent").length){
+                    fixRecordSlowStart(this,ui.draggable.data('sound'));
+                }
+                else{
+                    addAudioProperties(this);
+                }
             }
         });
     }
@@ -134,7 +139,12 @@ $('.droppable').droppable({
     drop: function(event, ui) {
         $(this).children('img').attr('src',ui.draggable.children('img').attr('src'));
         $(this).data('sound',ui.draggable.data('sound'));
-        addAudioProperties(this);
+        if($(ui.draggable).parent("#recordTabContent").length){
+            fixRecordSlowStart(this,ui.draggable.data('sound'));
+        }
+        else{
+            addAudioProperties(this);
+        }
     }
 });
 
@@ -178,14 +188,13 @@ $("#btn-record").click(function(e){
                     $(tempRecordBtn).addClass("clicked");
                 },
                 function(error){
-                    console.log("Error : "+error.name);
-                    $("#recordErrorDialog").children("div").children("div").children(".modal-body").append('<p>Recording is failed. Please check your record device or give the permission.</p>');
-                    $("#recordErrorDialog").children("div").children("div").children(".modal-header").children(".modal-title").text("Recored Failed");
-                    $("#recordErrorDialog").modal('show');
+                    //console.log("Error : "+error.name);
+                    recordErrorFunction();
                 });
         }
         else{
-            console.log("getUserMedia is not support!");
+            //console.log("getUserMedia is not support!");
+            recordErrorFunction();
         }
     }
     else{
@@ -214,6 +223,13 @@ $("#btn-record").click(function(e){
     }
     
 });
+function recordErrorFunction(){
+    if($("#recordErrorDialog").children("div").children("div").children(".modal-body").children().length < 1){
+        $("#recordErrorDialog").children("div").children("div").children(".modal-body").append('<p>Recording is failed. Please check your record device or give the permission.</p>');
+        $("#recordErrorDialog").children("div").children("div").children(".modal-header").children(".modal-title").text("Recored Failed");
+    }
+    $("#recordErrorDialog").modal('show');
+}
 
 function fixRecordSlowStart(object,url){
     var request = new XMLHttpRequest();
@@ -223,11 +239,17 @@ function fixRecordSlowStart(object,url){
     request.onload = function() {
         context.decodeAudioData(request.response, function(buffer) {
             var bufferData = buffer.getChannelData(0);
-            var tmpArray =  Array.prototype.slice.call(bufferData);
-            var tmpArray2 = tmpArray.slice(1000,bufferData.length);
-            console.log("sss = "+bufferData.length);
-            bufferData.set(new Float32Array(tmpArray2),0);
-            object.buffer = buffer;
+            var offset = Math.floor(bufferData.length/3);
+            object.buffer = context.createBuffer(1,bufferData.length-offset,buffer.sampleRate);
+            var targetBufferData = object.buffer.getChannelData(0);
+            //store init message
+            for(var i = 0; i<10; i++){
+                targetBufferData[i] = bufferData[i+offset];
+            }
+            //cutting
+            for(var i = 10; i<bufferData.length-offset; i++){
+                targetBufferData[i] = bufferData[i+offset];
+            }
         });
     }
     request.send();
@@ -235,8 +257,8 @@ function fixRecordSlowStart(object,url){
     var sourceBuf;
     object.play = function () {
         var s = context.createBufferSource();
-        //s.playbackRate.value = Math.min(1.0/playSpeedSec, 2.0);
         sourceBuf = s;
+        //s.playbackRate.value = Math.min(1.0/playSpeedSec, 2.0);
         s.buffer = object.buffer;
         s.connect(context.destination);
         s.start(0);
