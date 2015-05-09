@@ -115,6 +115,22 @@ table.table{
 	color:#ffffff; 
 }
 
+.share-button{
+	margin-top: 1%;
+}
+#bt-fb-share > img, #bt-g-share > img{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	opacity: 0.6;
+	transition: 0.2s;
+	-webkit-transition: 0.2s;
+}
+#bt-fb-share > img:hover, #bt-g-share > img:hover{
+	width: 30px;
+	height: 30px;
+	opacity: 1.0;
+}
 /*make footer stick to bottom*/
 * {
   margin: 0;

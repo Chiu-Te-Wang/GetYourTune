@@ -361,4 +361,14 @@ function currCallback(blob){
     $("#saveAudioDialog").modal('show');
 }
 
+$("#bt-fb-share").click(function(){
+     FB.ui({
+    method: 'share',
+    href: "http://chiu-te-wang.github.io/GetYourTune/",
+    caption: "Get Your Tune",
+    description: "Click, drag, and drop. Get your own tune!",
+    message: "Enjoy it!",
+    picture: "http://imgur.com/s08yUiv",
+}, function(response){});
+});
 
