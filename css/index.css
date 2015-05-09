@@ -115,6 +115,10 @@ table.table{
 	color:#ffffff; 
 }
 
+div.col-md-4.share-button.sharer-0{
+	width: 33.3333%;
+}
+
 /*make footer stick to bottom*/
 * {
   margin: 0;
@@ -124,27 +128,28 @@ html, body {
 }
 #body {
   min-height: 100%;
-  margin-bottom: -25px; 
+  margin-bottom: -60px; 
 }
 #body:after {
   content: "";
   display: block;
 }
 #footer, #body:after {
-  height: 25px; 
+  height: 60px; 
 }
 #footer {
   background: #1A1D19;
 }
 
 .copyright{
-	margin-top: auto;
+	margin-top: 1%;
 	margin-bottom: auto;
 }
 
 .copyright-prefix{
 	color: #8C8989;
 	text-align: center;
+	margin-top: 1%;
 }
 
 .copyright-prefix > a{

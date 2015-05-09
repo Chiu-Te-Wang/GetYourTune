@@ -361,4 +361,18 @@ function currCallback(blob){
     $("#saveAudioDialog").modal('show');
 }
 
+//social share
+//$(".share-button")
+config = {
+  title:       "Get Your Tune",
+  description: "Click, drag ,and drop. Get your own tune!",
+  image:       "../img/share.png",
+  networks: {
+    facebook: {
+      //app_id: // Facebook app id for tracking shares. if provided, will use the facebook API
+    }
+  }
+}
+
+var share = new Share('.share-button', config);
 
