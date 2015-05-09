@@ -163,6 +163,7 @@ $("#slider-speed").slider({
 //record event
 var streamData;
 var recordRTC;
+var fixAudioURL;
 $("#btn-record").click(function(e){
     if(!($(this).hasClass("clicked"))){
         var tempRecordBtn = this;
@@ -207,21 +208,45 @@ $("#btn-record").click(function(e){
             $(recordTag).click(function(){
                 $(this).trigger('play');
             });
-            addAudioProperties(recordTag);
-
-            //$("table").append('<div class="col-md-1"><a href="' + audioURL + '" download="RecordRTC.webm" target="_blank">Save RecordRTC.webm to Disk!</a></div>');
-            //addAudioProperties("#recordTest");
-
-            /*var recordedBlob = recordRTC.getBlob();
-            recordRTC.getDataURL(function(dataURL) {
-                console.log("dataURL : "+dataURL);
-            });
-            console.log("recordedBlob : "+recordedBlob);*/
+            fixRecordSlowStart(recordTag, audioURL);
         });
 
     }
     
 });
+
+function fixRecordSlowStart(object,url){
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.responseType = 'arraybuffer';
+ 
+    request.onload = function() {
+        context.decodeAudioData(request.response, function(buffer) {
+            var bufferData = buffer.getChannelData(0);
+            var tmpArray =  Array.prototype.slice.call(bufferData);
+            var tmpArray2 = tmpArray.slice(1000,bufferData.length);
+            console.log("sss = "+bufferData.length);
+            bufferData.set(new Float32Array(tmpArray2),0);
+            object.buffer = buffer;
+        });
+    }
+    request.send();
+
+    var sourceBuf;
+    object.play = function () {
+        var s = context.createBufferSource();
+        //s.playbackRate.value = Math.min(1.0/playSpeedSec, 2.0);
+        sourceBuf = s;
+        s.buffer = object.buffer;
+        s.connect(context.destination);
+        s.start(0);
+        object.s = s;
+    }
+    object.stop = function () {
+        sourceBuf.stop(0);
+        object.s = sourceBuf;
+    }
+}
 
 //click sound-source event
 $(".sound-source").click(function(){
@@ -260,11 +285,11 @@ $("#btn-save-tune").click(function(e){
     //var blob = new Blob(chunk, { 'type' : 'audio/mpeg; codecs=mpeg' });
     //window.location.href = URL.createObjectURL(blob);
     //$("table").append('<div class="col-md-1"><a href="' + URL.createObjectURL(blob) + '" download="RecordRTC.mp3" target="_blank">Save RecordRTC.webm to Disk!</a></div>');
-    setupSaving(appendBuffer,channelNumCounter);
+    setupSaving(appendBuffer,channelNumCounter,currCallback);
 
 });
 
-function setupSaving(saveBuffer,channelNum){
+function setupSaving(saveBuffer,channelNum,cb){
     var WORKER_PATH = './js/Recorderjs/recorderWorker.js';
     var worker = new Worker(WORKER_PATH);
     worker.postMessage({
@@ -276,7 +301,7 @@ function setupSaving(saveBuffer,channelNum){
     });
     worker.onmessage = function(e){
       var blob = e.data;
-      currCallback(blob);
+      cb(blob);
     }
     var buffer = [];
     for (var channel = 0; channel < channelNum; channel++){
