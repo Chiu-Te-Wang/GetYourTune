@@ -369,7 +369,8 @@ config = {
   image:       "../img/share.png",
   networks: {
     facebook: {
-      //app_id: // Facebook app id for tracking shares. if provided, will use the facebook API
+      app_id: 566194633483620
+      // Facebook app id for tracking shares. if provided, will use the facebook API
     }
   }
 }
