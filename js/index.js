@@ -361,18 +361,4 @@ function currCallback(blob){
     $("#saveAudioDialog").modal('show');
 }
 
-//social share
-//$(".share-button")
-var config = {
-  title:       "Get Your Tune",
-  description: "Click, drag ,and drop. Get your own tune!",
-  networks: {
-    facebook: {
-      image: "http://imgur.com/s08yUiv",
-      text: "Click, drag ,and drop. Get your own tune!"
-    }
-  }
-}
-
-var share = new Share('.share-button', config);
 
