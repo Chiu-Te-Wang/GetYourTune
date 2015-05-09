@@ -363,12 +363,12 @@ function currCallback(blob){
 
 $("#bt-fb-share").click(function(){
      FB.ui({
-    method: 'feed',
-    link: "http://chiu-te-wang.github.io/GetYourTune/",
+    method: 'share',
+    href: "http://chiu-te-wang.github.io/GetYourTune/",
     caption: "Get Your Tune",
     description: "Click, drag, and drop. Get your own tune!",
     message: "Enjoy it!",
-    picture: "http://imgur.com/s08yUiv"
+    picture: "http://i.imgur.com/s08yUiv.png"
 }, function(response){});
 });
 
