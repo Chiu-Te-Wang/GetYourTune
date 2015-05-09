@@ -1,0 +1,124 @@
+#top-bar{
+	margin-bottom: 51px;
+}
+#footer{
+	background-color: silver;
+}
+
+button{
+	margin: 1px;
+}
+
+.navbar-inverse{
+	border-color: #00B894;
+	background-color: #34ACAC;
+}
+.navbar-inverse .navbar-brand{
+	color : #FFFFFF;
+}
+.navbar-inverse .navbar-nav > li > a{
+	color : #AFECE0;
+}
+.navbar-inverse .navbar-nav > .active > a, 
+.navbar-inverse .navbar-nav > .active > a:focus, 
+.navbar-inverse .navbar-nav > .active > a:hover{
+	color: #ffffff;
+	background-color:#00D7AD; 
+}
+
+tbody td.myhover{
+	background-color: #e9c9ff;
+}
+
+.nav .nav-tab{
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+.tab-pane{
+  padding:3px 0px 0px 8px;
+  border: 3px solid #F48122;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  margin-left:1px;
+}
+div.draggable, td.droppable{
+	padding: 10px;
+	margin-left: auto;
+    margin-right: auto;
+}
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+#drumTab >a{
+	background-color:#F48122;
+}
+#otherTab >a{
+	background-color:#FFD301;
+}
+#specialTab >a{
+	background-color:#C852C3;
+}
+#recordTab >a{
+	background-color:#20F320;	
+}
+
+#sidebar2, #sidebar, #main-div{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+table.table{
+	margin-top:20px;
+}
+
+#slider-speed-wrapper{
+	margin-top: 20px;
+}
+
+#recordErrorDialog-title{
+	background-color: #d9534f;
+}
+#saveAudioDialog-title{
+	background-color: #5CFF67;
+}
+
+/*make footer stick to bottom*/
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+#body {
+  min-height: 100%;
+  margin-bottom: -25px; 
+}
+#body:after {
+  content: "";
+  display: block;
+}
+#footer, #body:after {
+  height: 25px; 
+}
+#footer {
+  background: #1A1D19;
+}
+
+.copyright{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.copyright-prefix{
+	color: #8C8989;
+	text-align: center;
+}
+
+.copyright-prefix > a{
+	color:silver;
+}
+
+.copyright-prefix > a:hover{
+	color: #8B5CE0;
+	text-decoration: none;
+}

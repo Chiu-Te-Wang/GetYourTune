@@ -1,0 +1,87 @@
+#top-bar{
+	margin-bottom: 51px;
+}
+#footer{
+	background-color: silver;
+}
+
+button{
+	margin: 1px;
+}
+
+.navbar-inverse{
+	border-color: #00B894;
+	background-color: #34ACAC;
+}
+.navbar-inverse .navbar-brand{
+	color : #FFFFFF;
+}
+.navbar-inverse .navbar-nav > li > a{
+	color : #AFECE0;
+}
+.navbar-inverse .navbar-nav > .active > a, 
+.navbar-inverse .navbar-nav > .active > a:focus, 
+.navbar-inverse .navbar-nav > .active > a:hover{
+	color: #ffffff;
+	background-color:#00D7AD; 
+}
+
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+#sidebar2, #sidebar, #main-div{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+/*===========================*/
+
+.jumbotron{
+	padding-top: 60px;
+	margin-top: 35px;
+}
+/*===========================*/
+
+/*make footer stick to bottom*/
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+#body {
+  min-height: 100%;
+  margin-bottom: -25px; 
+}
+#body:after {
+  content: "";
+  display: block;
+}
+#footer, #body:after {
+  height: 25px; 
+}
+#footer {
+  background: #1A1D19;
+}
+
+.copyright{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.copyright-prefix{
+	color: #8C8989;
+	text-align: center;
+}
+
+.copyright-prefix > a{
+	color:silver;
+}
+
+.copyright-prefix > a:hover{
+	color: #8B5CE0;
+	text-decoration: none;
+}
