@@ -102,17 +102,10 @@ function interleave(inputL, inputR){
 function overlap(input1, input2){
   var length = Math.min(input1.length , input2.length);
   var result = new Float32Array(length);
-  console.log("==========================");
 
-
-  var index = 0,
-    inputIndex = 0;
-
+  var index = 0;
   while (index < length){
-    result[index] = input1[index];
-    result[index] += input2[index];
-    console.log(""+input1[index]);
-
+    input1[index] += input2[index];
     index++;
   }
   return result;
