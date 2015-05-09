@@ -366,6 +366,7 @@ function currCallback(blob){
 config = {
   title:       "Get Your Tune",
   description: "Click, drag ,and drop. Get your own tune!",
+  image:       "http://imgur.com/s08yUiv",
   networks: {
     facebook: {
       //app_id: 
