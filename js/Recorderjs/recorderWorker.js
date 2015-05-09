@@ -41,10 +41,14 @@ function exportWAV(type){
   for (var channel = 0; channel < numChannels; channel++){
     buffers.push(mergeBuffers(recBuffers[channel], recLength));
   }
-  if (numChannels === 2){
+  /*if (numChannels === 2){
       var interleaved = interleave(buffers[0], buffers[1]);
   } else {
       var interleaved = buffers[0];
+  }*/
+  var interleaved = buffers[0];
+  for(var channel = 0; channel < numChannels-1; channel++){
+    overlap(interleaved, buffers[channel+1]);
   }
   var dataview = encodeWAV(interleaved);
   var audioBlob = new Blob([dataview], { type: type });
@@ -87,11 +91,29 @@ function interleave(inputL, inputR){
 
   var index = 0,
     inputIndex = 0;
-
   while (index < length){
     result[index++] = inputL[inputIndex];
     result[index++] = inputR[inputIndex];
     inputIndex++;
+  }
+  return result;
+}
+
+function overlap(input1, input2){
+  var length = Math.min(input1.length , input2.length);
+  var result = new Float32Array(length);
+  console.log("==========================");
+
+
+  var index = 0,
+    inputIndex = 0;
+
+  while (index < length){
+    result[index] = input1[index];
+    result[index] += input2[index];
+    console.log(""+input1[index]);
+
+    index++;
   }
   return result;
 }
@@ -112,6 +134,7 @@ function writeString(view, offset, string){
 function encodeWAV(samples){
   var buffer = new ArrayBuffer(44 + samples.length * 2);
   var view = new DataView(buffer);
+  var channelNum = 1;
 
   /* RIFF identifier */
   writeString(view, 0, 'RIFF');
@@ -126,13 +149,13 @@ function encodeWAV(samples){
   /* sample format (raw) */
   view.setUint16(20, 1, true);
   /* channel count */
-  view.setUint16(22, numChannels, true);
+  view.setUint16(22, channelNum, true);
   /* sample rate */
   view.setUint32(24, sampleRate, true);
   /* byte rate (sample rate * block align) */
   view.setUint32(28, sampleRate * 4, true);
   /* block align (channel count * bytes per sample) */
-  view.setUint16(32, numChannels * 2, true);
+  view.setUint16(32, channelNum * 2, true);
   /* bits per sample */
   view.setUint16(34, 16, true);
   /* data chunk identifier */

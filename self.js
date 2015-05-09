@@ -107,7 +107,7 @@ function addAudioProperties(object) {
     var sourceBuf;
     object.play = function () {
         var s = context.createBufferSource();
-        s.playbackRate.value = Math.min(1.0/playSpeedSec, 2.0);
+        //s.playbackRate.value = Math.min(1.0/playSpeedSec, 2.0);
         sourceBuf = s;
         s.buffer = object.buffer;
         s.connect(context.destination);
@@ -232,37 +232,41 @@ $(".sound-source").click(function(){
 $("#btn-save-tune").click(function(e){
     var bufferLength = 0;
     var bufferSampleRate = 0.0;
-    $("#main-table").children("tr").each(function(){
-        $(this).children("td").each(function(){
-            bufferLength += this.buffer.length;
+    $("#main-table").children("tr").children("td").each(function(){
             bufferSampleRate = this.buffer.sampleRate;
+    });
+    var lengthOfEachSlot = playSpeedSec*bufferSampleRate;
+    var bufferLength = lengthOfEachSlot*measureNumber;
 
-        });
-    });
-    //console.log("bufferLength = "+bufferLength);
-    //console.log("bufferSampleRate = "+bufferSampleRate);
-	var appendBuffer = context.createBuffer(1, bufferLength, bufferSampleRate);
-    var channel = appendBuffer.getChannelData(0);
-    var tempLength = 0;
-    $("#main-table").children("tr").each(function(){
-        $(this).children("td").each(function(){
-            channel.set(this.buffer.getChannelData(0),tempLength);
-            tempLength += this.buffer.length;
-        });
-    });
+    var channelNum = $("#main-table").children("tr").length;
+	var appendBuffer = context.createBuffer(channelNum, Math.floor(bufferLength), bufferSampleRate);
+
+    var channelNumCounter = 0;
     var chunk = [];
-    chunk.push(appendBuffer.getChannelData(0));
+    $("#main-table").children("tr").each(function(){
+        var tempLength = 0;
+        var channel = appendBuffer.getChannelData(channelNumCounter);
+        $(this).children("td").each(function(){
+            var bufferData = this.buffer.getChannelData(0);
+            var tmpArray =  Array.prototype.slice.call(bufferData);
+            var tmpArray2 = tmpArray.slice(0,Math.floor(lengthOfEachSlot)-1);
+            //var bufferData2 = new Float32Array(tmpArray2)
+            channel.set(new Float32Array(tmpArray2),tempLength);
+            tempLength += Math.floor(lengthOfEachSlot)-1;
+        });
+        chunk.push(channel);
+        channelNumCounter++;
+    });
     //var blob = new Blob(chunk, { 'type' : 'audio/mpeg; codecs=mpeg' });
     //window.location.href = URL.createObjectURL(blob);
     //$("table").append('<div class="col-md-1"><a href="' + URL.createObjectURL(blob) + '" download="RecordRTC.mp3" target="_blank">Save RecordRTC.webm to Disk!</a></div>');
-    setupSaving(appendBuffer);
+    setupSaving(appendBuffer,channelNumCounter);
 
 });
 
-function setupSaving(saveBuffer){
+function setupSaving(saveBuffer,channelNum){
     var WORKER_PATH = './js/Recorderjs/recorderWorker.js';
     var worker = new Worker(WORKER_PATH);
-    var channelNum = 1;
     worker.postMessage({
       command: 'init',
       config: {
@@ -287,6 +291,7 @@ function setupSaving(saveBuffer){
         type: 'audio/wav'
     });
     //worker.postMessage({ command: 'clear' });
+    //worker.terminate();
 }
 
 var outputCounter = 1;
