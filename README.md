@@ -31,3 +31,4 @@ This website uses these icons :<br>
 This website uses these package : <br>
 <div>Use <a href="https://github.com/mattdiamond/Recorderjs">Recorderjs</a> to save audio as .wav file.</div>
 <div>Use <a href="https://github.com/muaz-khan/WebRTC-Experiment/tree/master/RecordRTC">RecordRTC</a> to record audio from user audio input.</div>
+<div>Use <a href="https://github.com/carrot/share-button">share-button</a> to plugin social website share button.</div>
