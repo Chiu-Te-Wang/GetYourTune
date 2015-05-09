@@ -368,7 +368,11 @@ $("#bt-fb-share").click(function(){
     caption: "Get Your Tune",
     description: "Click, drag, and drop. Get your own tune!",
     message: "Enjoy it!",
-    picture: "http://imgur.com/s08yUiv",
+    media: [{  
+                type: "image", 
+                src: "http://imgur.com/s08yUiv",    
+                href: "http://www.permadi.com/"  // Go here if user click the picture
+            }]
 }, function(response){});
 });
 
