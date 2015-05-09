@@ -36,6 +36,35 @@ button{
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
+/*==================================*/
+
+.carousel-caption {
+    right: 20%;
+    left: 20%;
+    padding-bottom: 5%;
+    color:#CADBD7;
+    text-shadow: -1px 0 #48514F, 0 1px #48514F, 1px 0 #48514F, 0 -1px #48514F;
+}
+.carousel-caption > h3{
+	font-size:40px;
+}
+.carousel-caption > p{
+	font-size:20px;
+}
+
+.carousel {
+    margin-top: 2%;
+}
+
+.carousel-indicators li {
+  background-color: #669966;
+}
+.carousel-indicators .active {
+  background-color: #FF7600;
+}
+
+
+/*==================================*/
 
 /*make footer stick to bottom*/
 * {

@@ -82,6 +82,39 @@ table.table{
 	background-color: #5CFF67;
 }
 
+.btn-music:hover, .btn-music:focus{
+	background-color: #71E511;
+	border-color: #85ED2F;
+	color:#ffffff;
+}
+.btn-music{
+	background-color: #91F73D;
+	border-color: #8CE93F;
+	color:#ffffff;
+}
+
+.btn-add:hover,.btn-add:focus{
+	background-color: #995CB5;
+	border-color: #9958B7;
+	color:#ffffff; 
+}
+.btn-add{
+	background-color: #A364C0;
+	border-color: #8F57A9;
+	color:#ffffff; 
+}
+
+.btn-save{
+	background-color: #FFC415;
+	border-color: #FFC929;
+	color:#ffffff; 
+}
+.btn-save:hover,.btn-save:focus{
+	background-color: #F5B800;
+	border-color: #DEA600;
+	color:#ffffff; 
+}
+
 /*make footer stick to bottom*/
 * {
   margin: 0;
