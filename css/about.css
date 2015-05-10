@@ -65,6 +65,22 @@ button{
 
 
 /*==================================*/
+.share-button{
+	margin-top: 1%;
+}
+#bt-fb-share > img, #bt-g-share > img, #bt-twitter-share > img{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	opacity: 0.6;
+	transition: 0.2s;
+	-webkit-transition: 0.2s;
+}
+#bt-fb-share > img:hover, #bt-g-share > img:hover, #bt-twitter-share > img:hover{
+	width: 30px;
+	height: 30px;
+	opacity: 1.0;
+}
 
 /*make footer stick to bottom*/
 * {
@@ -75,27 +91,28 @@ html, body {
 }
 #body {
   min-height: 100%;
-  margin-bottom: -25px; 
+  margin-bottom: -60px; 
 }
 #body:after {
   content: "";
   display: block;
 }
 #footer, #body:after {
-  height: 25px; 
+  height: 60px; 
 }
 #footer {
   background: #1A1D19;
 }
 
 .copyright{
-	margin-top: auto;
+	margin-top: 1%;
 	margin-bottom: auto;
 }
 
 .copyright-prefix{
 	color: #8C8989;
 	text-align: center;
+	margin-top: 1%;
 }
 
 .copyright-prefix > a{
