@@ -370,5 +370,18 @@ $("#bt-fb-share").click(function(){
     message: "Enjoy it!",
     picture: "http://i.imgur.com/s08yUiv.png"
 }, function(response){});
+     ga('send', 'event', 'button', 'click', 'fb-share');    
+});
+
+$('#bt-g-share').click(function(){
+    ga('send', 'event', 'button', 'click', 'g+-share'); 
+});
+
+$("#bt-twitter-share").click(function(){
+    ga('send', 'event', 'button', 'click', 'twitter-share'); 
+});
+
+$("#github_project").click(function(){
+    ga('send', 'event', 'link', 'click', 'github-project-link'); 
 });
 
