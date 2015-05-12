@@ -1,0 +1,22 @@
+{
+  "name": "NMLAB_api_experiment",
+  "version": "1.0.0",
+  "description": "nmlab api experiment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Chiu-Te-Wang/GetYourTune"
+  },
+  "author": "Chiu-Te-Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chiu-Te-Wang/GetYourTune/issues"
+  },
+  "homepage": "https://github.com/Chiu-Te-Wang/GetYourTune",
+  "dependencies": {
+    "recordrtc": "^5.0.9"
+  }
+}

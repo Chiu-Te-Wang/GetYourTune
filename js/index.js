@@ -34,6 +34,7 @@ $('#btn-add-table').on("click",function(){
         cell.setAttribute('data-sound',soundArray[0]);
         cell.className = cell.className + " droppable ";
         cell.className = cell.className + " draggable ";
+        cell.className = cell.className + " sound-source ";
         var img = document.createElement('img');
         img.src = "img/default.png";
         img.alt="kk";
@@ -55,6 +56,9 @@ $('#btn-add-table').on("click",function(){
             }
         });
         $(cell).draggable({ opacity: 0.7, helper: "clone", zIndex: 100 });
+        $(cell).click(function(){
+            $(this).trigger('play');
+        });
     }
 });
 
