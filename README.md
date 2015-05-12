@@ -1,7 +1,14 @@
 #Get Your Tune
 ##2015 NMLAB API EXPERIMENT<br>
 ###Author : Chiu-Te-Wang<br>
+##Introduction
+GetYourTune is a website mainly using <a href="http://webaudio.github.io/web-audio-api/">Web Audio API</a> to implement, and also use some useful packages on github like Recorderjs and RecordRTC.<br>
 ###License:<br>
+
+This website uses these packages : <br>
+<div>Use <a href="https://github.com/mattdiamond/Recorderjs">Recorderjs</a> to save audio as .wav file.</div>
+<div>Use <a href="https://github.com/muaz-khan/WebRTC-Experiment/tree/master/RecordRTC">RecordRTC</a> to record audio from user audio input.</div><br>
+
 This website uses these sounds :<br>
 * sound1.mp3 :(cc by-nc 3.0) https://www.freesound.org/people/VEXST/ <br>
 * sound3.mp3 :(cc by-nc 3.0) https://www.freesound.org/people/Seidhepriest/ <br>
@@ -31,7 +38,3 @@ This website uses these icons :<br>
 <div>fb_share.png made by <a href="http://www.simpleicon.com" title="SimpleIcon">SimpleIcon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
 <div>g_share.png made by <a href="http://www.elegantthemes.com" title="Elegant Themes">Elegant Themes</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
 <div>twitter_share.png made by <a href="http://www.meanicons.com" title="Vectorgraphit">Vectorgraphit</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
-
-This website uses these package : <br>
-<div>Use <a href="https://github.com/mattdiamond/Recorderjs">Recorderjs</a> to save audio as .wav file.</div>
-<div>Use <a href="https://github.com/muaz-khan/WebRTC-Experiment/tree/master/RecordRTC">RecordRTC</a> to record audio from user audio input.</div>
