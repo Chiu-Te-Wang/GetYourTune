@@ -356,7 +356,7 @@ function setupSaving(saveBuffer,channelNum,cb){
 
 var outputCounter = 1;
 function currCallback(blob){
-    var filename = 'Output'+outputCounter+'.wav';
+    var filename = 'myTune'+outputCounter+'.wav';
     outputCounter++;
     var url = URL.createObjectURL(blob);
     var link = window.document.createElement('a');
