@@ -32,7 +32,8 @@ $('#btn-add-table').on("click",function(){
     for(i = 0; i<cellNumber; i++){
         var cell = row.appendChild(document.createElement('td'));
         cell.setAttribute('data-sound',soundArray[0]);
-        cell.className = cell.className + "droppable";
+        cell.className = cell.className + " droppable ";
+        cell.className = cell.className + " draggable ";
         var img = document.createElement('img');
         img.src = "img/default.png";
         img.alt="kk";
@@ -53,6 +54,7 @@ $('#btn-add-table').on("click",function(){
                 }
             }
         });
+        $(cell).draggable({ opacity: 0.7, helper: "clone", zIndex: 100 });
     }
 });
 
@@ -124,6 +126,17 @@ function addAudioProperties(object) {
         object.s = sourceBuf;
     }
 }
+
+//clean all sound
+$("#btn-clean-tune").click(function(){
+    $("#main-table").children("tr").each(function(){
+        $(this).children("td").each(function(){
+            $(this).children('img').attr('src',"img/default.png");
+            $(this).data('sound',"audio/sound0.mp3");
+            addAudioProperties(this);
+        });
+    });
+});
 
 $('#sidebar').children('#btn-sidebar-toggle').click(function(){
     $('#sidebar').hide();

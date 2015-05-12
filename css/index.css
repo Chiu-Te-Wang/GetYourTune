@@ -133,6 +133,17 @@ table.table{
 	color:#ffffff; 
 }
 
+.btn-clean{
+	background-color: #93D3D3;
+	border-color: #8ACDCD;
+	color:#ffffff; 
+}
+.btn-clean:hover,.btn-clean:focus{
+	background-color: #76B6B6;
+	border-color: #65A6A6;
+	color:#ffffff; 
+}
+
 .share-button{
 	margin-top: 1%;
 }
