@@ -391,7 +391,7 @@ $("#bt-fb-share").click(function(){
     caption: "Get Your Tune",
     description: "Click, drag, and drop. Get your own tune!",
     message: "Enjoy it!",
-    picture: "http://i.imgur.com/s08yUiv.png"
+    picture: "../img/share.png"
 }, function(response){});
      ga('send', 'event', 'button', 'click', 'fb-share');    
 });
