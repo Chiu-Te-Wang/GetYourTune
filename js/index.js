@@ -50,6 +50,9 @@ $('#btn-add-table').on("click",function(){
                 if($(ui.draggable).parent("#recordTabContent").length){
                     fixRecordSlowStart(this,ui.draggable.data('sound'));
                 }
+                else if($(ui.draggable).children("img").attr('src') == "img/record0.png"){
+                    fixRecordSlowStart(this,ui.draggable.data('sound'));
+                }
                 else{
                     addAudioProperties(this);
                 }
@@ -157,6 +160,9 @@ $('.droppable').droppable({
         $(this).children('img').attr('src',ui.draggable.children('img').attr('src'));
         $(this).data('sound',ui.draggable.data('sound'));
         if($(ui.draggable).parent("#recordTabContent").length){
+            fixRecordSlowStart(this,ui.draggable.data('sound'));
+        }
+        else if($(ui.draggable).children("img").attr('src') == "img/record0.png"){
             fixRecordSlowStart(this,ui.draggable.data('sound'));
         }
         else{
